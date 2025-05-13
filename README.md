@@ -9,23 +9,26 @@ To install and run the program, follow these steps:
    git clone https://github.com/maxshapira/dns-sniffer.git
 
 2. Navigate to the project directory:
+    ```bash
     cd dns-sniffer/
 
 3. Run the program with the desired network interface:
+    ```bash
     ./dns-sniffer <interface>
 
     Example:
+    ```bash
     ./dns-sniffer eth0
 
 4. Test the Program Using dig Commands
 
 You can test the program by generating DNS traffic using the following dig commands:
 
-IPv4 Query: dig @8.8.8.8 openai.com
-IPv6 Query: dig @8.8.8.8 www.google.com AAAA
-CNAME Query: dig @8.8.8.8 www.youtube.com
-CNAME Recursive Query:dig @8.8.8.8 www.gov.uk
-CNAME Compressed Query:dig @8.8.8.8 www.microsoft.com
+IPv4 Query: dig @8.8.8.8 openai.com  
+IPv6 Query: dig @8.8.8.8 www.google.com AAAA  
+CNAME Query: dig @8.8.8.8 www.youtube.com  
+CNAME Recursive Query:dig @8.8.8.8 www.gov.uk  
+CNAME Compressed Query:dig @8.8.8.8 www.microsoft.com  
 
 ## Prerequisites
 Ensure the following dependencies are installed:
