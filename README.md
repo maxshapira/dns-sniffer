@@ -1,9 +1,34 @@
 # dns-sniffer
 
-Test dig commands for reference:
+## Installation and Usage
 
-IPV4: dig @8.8.8.8 openai.com  
-IPV6: dig @8.8.8.8 www.google.com AAAA  
-CNAME: dig @8.8.8.8 www.youtube.com  
-CNAME recursive: dig @8.8.8.8 www.gov.uk  
-CNAME compressed: dig @8.8.8.8 www.microsoft.com  
+To install and run the program, follow these steps:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/maxshapira/dns-sniffer.git
+
+2. Navigate to the project directory:
+    cd dns-sniffer/
+
+3. Run the program with the desired network interface:
+    ./dns-sniffer <interface>
+
+    Example:
+    ./dns-sniffer eth0
+
+4. Test the Program Using dig Commands
+
+You can test the program by generating DNS traffic using the following dig commands:
+
+IPv4 Query: dig @8.8.8.8 openai.com
+IPv6 Query: dig @8.8.8.8 www.google.com AAAA
+CNAME Query: dig @8.8.8.8 www.youtube.com
+CNAME Recursive Query:dig @8.8.8.8 www.gov.uk
+CNAME Compressed Query:dig @8.8.8.8 www.microsoft.com
+
+## Prerequisites
+Ensure the following dependencies are installed:
+- `libpcap` (for packet capturing)
+- A Linux-based system with root privileges
+
