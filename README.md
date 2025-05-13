@@ -12,14 +12,18 @@ To install and run the program, follow these steps:
     ```bash
     cd dns-sniffer/
 
-3. Run the program with the desired network interface:
+3. Compile the program:
     ```bash
-    ./dns-sniffer <interface>
+    make
+
+4.  Run the program with the desired network interface:
+    ```bash
+    sudo ./dns-sniffer <interface>
 
     Example:
-    ./dns-sniffer eth0
+    sudo ./dns-sniffer eth0
 
-4. Test the Program Using dig Commands
+5. Test the Program Using dig Commands
 
 You can test the program by generating DNS traffic using the following dig commands:
 
