@@ -17,7 +17,6 @@ To install and run the program, follow these steps:
     ./dns-sniffer <interface>
 
     Example:
-    ```bash
     ./dns-sniffer eth0
 
 4. Test the Program Using dig Commands
