@@ -1,4 +1,32 @@
+#include <signal.h>
+#include <stdlib.h>
 #include "capture.h" 
+
+pcap_t *handle = NULL; // Global handle for cleanup
+
+/**
+ * @brief Exits the program and cleans up resources.
+ *
+ * @param status The exit status code.
+ */
+int exit_program(int status) {
+    if (handle) {
+        pcap_close(handle); // Close the pcap handle
+    }
+    exit(status);
+}
+
+/**
+ * @brief Signal handler for SIGINT (Ctrl+C).
+ *
+ * @param signal The signal number.
+ */
+void handle_signal(int signal) {
+    if (signal == SIGINT) {
+        printf("\nSIGINT received. Cleaning up and exiting...\n");
+        exit_program(0); // Clean up and exit
+    }
+}
 
 /**
  * @brief Main function to capture DNS packets and retrieve domains,
@@ -15,19 +43,24 @@ int main(int argc, char *argv[])
 
     const char *interface = argv[1];
 
-    pcap_t *handle = open_interface(interface);
+    // Set up signal handler
+    signal(SIGINT, handle_signal);
+
+    handle = open_interface(interface);
     if (!handle)
     {
-        return 1; // Failed to open interface
+        exit_program(1); // Failed to open interface
     }
 
     if (!setup_filter(handle))
     {
-        return 1; // Failed to set up filter
+        exit_program(1); // Failed to set up filter
     }
 
-    start_sniffing(handle, interface);
+    if(!start_sniffing(handle, interface))
+    {
+        exit_program(1); // Failed to start sniffing
+    }
 
-    pcap_close(handle);
-    return 0;
+    exit_program(0); // Successful exit
 }

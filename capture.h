@@ -24,7 +24,8 @@ int setup_filter(pcap_t *handle);
  * 
  * @param handle The pcap_t handle for the open interface.
  * @param interface The name of the network interface.
+ * @return 1 on success, 0 on failure.
  */
-void start_sniffing(pcap_t *handle, const char *interface);
+int start_sniffing(pcap_t *handle, const char *interface);
 
 #endif // CAPTURE_H

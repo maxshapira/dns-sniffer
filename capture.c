@@ -23,14 +23,12 @@ int setup_filter(pcap_t *handle)
     if (pcap_compile(handle, &fp, filter_exp, 0, PCAP_NETMASK_UNKNOWN) == -1)
     {
         fprintf(stderr, "Error compiling filter '%s': %s\n", filter_exp, pcap_geterr(handle));
-        pcap_close(handle);
         return 0;
     }
     if (pcap_setfilter(handle, &fp) == -1)
     {
         fprintf(stderr, "Error setting filter: %s\n", pcap_geterr(handle));
         pcap_freecode(&fp);
-        pcap_close(handle);
         return 0;
     }
 
@@ -53,12 +51,14 @@ void packet_handler(__attribute__((unused)) u_char *args,
     parse_dns_response(packet, header->caplen);
 }
 
-void start_sniffing(pcap_t *handle, const char *interface)
+int start_sniffing(pcap_t *handle, const char *interface)
 {
     // Start capturing packets
     printf("Listening on %s for DNS responses...\n", interface);
     if (pcap_loop(handle, -1, packet_handler, NULL) < 0)
     {
         fprintf(stderr, "Error during packet capture: %s\n", pcap_geterr(handle));
+        return 0;
     }
+    return 1;
 }
