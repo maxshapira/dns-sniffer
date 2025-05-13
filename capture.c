@@ -39,10 +39,16 @@ int setup_filter(pcap_t *handle)
     return 1;
 }
 
-// Packet handler function
-// This function is called for each captured packet
-// It extracts the DNS response and calls the parse_dns_response function
-void packet_handler(__attribute__((unused)) u_char *args, const struct pcap_pkthdr *header, const u_char *packet)
+/**
+ * @brief Packet handler function that processes captured packets.
+ *
+ * @param args Unused argument.
+ * @param header Pointer to the packet header.
+ * @param packet Pointer to the captured packet data.
+ */
+void packet_handler(__attribute__((unused)) u_char *args,
+                    const struct pcap_pkthdr *header,
+                    const u_char *packet)
 {
     parse_dns_response(packet, header->caplen);
 }
